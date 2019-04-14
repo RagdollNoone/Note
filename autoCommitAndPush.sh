@@ -1,5 +1,5 @@
-USER='username'
-REPO='/home/'${USER}'/Sites/git/bitbucket/kb'
+USER='RagdollNoone'
+REPO='Note'
 COMMIT_TIMESTAMP=`date +'%Y-%m-%d %H:%M:%S %Z'`
 
 GIT=`which git`

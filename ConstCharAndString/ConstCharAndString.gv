@@ -1,0 +1,21 @@
+digraph ConstCharAndString{
+    node [shape = "box"]
+
+    a1 [label = "字符常量和字符串常量的区别"];
+
+    a2 [label = "字符常量是单引号引起的一个字符;\n
+        字符串常量是双引号引起的若干个字符"];
+
+    a3 [label = "字符常量相当于一个整形值( ASCII 值),可以参加表达式运算;\n
+        字符串常量代表一个地址值(该字符串在内存中存放位置)"];
+
+    a4 [label = "占内存大小 字符常量只占2个字节;(注意： char在Java中占两个字节)\n
+        字符串常量占若干个字节(至少一个字符结束标志)"];
+
+    a5 [label = "字符串常量占若干个字节, 若干是多少?, 怎么计算" style = "filled" fillcolor = "red"];
+
+    a1 -> a2 [style = "dashed" color = "black" label = "形式上" labelcolor = "blueviolet"];
+    a1 -> a3 [style = "dashed" color = "black" label = "含义上" labelcolor = "blueviolet"];
+    a1 -> a4 [style = "dashed" color = "black" label = "内存上" labelcolor = "blueviolet"];
+    a4 -> a5 [style = "dashed" color = "black" label = "question" labelcolor = "blueviolet"];
+}

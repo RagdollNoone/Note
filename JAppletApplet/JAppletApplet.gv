@@ -1,0 +1,6 @@
+digraph JAppletApplet{
+    node [shape = "box"]
+
+    a1 [label = "JApplet是啥" style = "filled" fillcolor = "red"];
+    a2 [label = "Applet是啥" style = "filled" fillcolor = "red"];
+}

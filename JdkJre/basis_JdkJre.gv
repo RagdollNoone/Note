@@ -1,0 +1,17 @@
+digraph basis_JdkJre{
+    node [shape = "box"]
+
+    a1 [label = ".java文件"];
+    a2 [label = ".class文件"];
+    a3 [label = "机器运行的二进制码"];
+    a4 [label = "jvm"];
+    a5 [label = "jre"];
+    a6 [label = "jdk"];
+    a7 [label = "为什么java编译比c++快?" style = "filled" fillcolor = "red"];
+    /* a8 [shape = "none" image = "./jdk&jvm.png"]; */
+
+    a1 -> a2 [style = "dashed" color = "black" label = "通过jdk编译" labelcolor = "blueviolet"];
+    a2 -> a3 [style = "dashed" color = "black" label = "通过jvm转化" labelcolor = "blueviolet"];
+
+    a6 -> a7 [style = "dashed" color = "black" label = "question"];
+}

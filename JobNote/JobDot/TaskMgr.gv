@@ -1,0 +1,29 @@
+digraph TaskMgr{
+    node [shape = "box"]
+
+    tm [label = "TaskMgr"];
+    t [label = "Task"];
+    trtc [label = "TaskRunTaskScript"];
+    ts [label = "TaskScript"];
+	tStep [label = "TaskStep"]
+
+    tss [label = "TaskStepStart"];
+	rts [label = "RunTaskScript"]
+    si [label = "SiMessage"]
+
+    tm -> trtc [style = "dashed" color = "blueviolet" label = "m_runTaskScript"];
+    tm -> t [style = "dashed" color = "blueviolet" label = "Vector<Task> taskList"];
+
+    trtc -> tm [style = "dashed" color = "blueviolet" label = "m_taskMgr"];
+    trtc -> ts [style = "dashed" color = "blueviolet" label = "m_script"];
+	trtc -> tStep [style = "dashed" color = "blueviolet" label = "m_step"];
+    trtc -> trtc [style = "dashed" color = "blueviolet" label = "m_this"];
+	trtc -> t [color = "blue4"];
+
+	ts -> tStep [style = "dashed" color = "blueviolet" label = "List<TaskStep> m_steps"];
+
+	tss -> si [color = "blue4"];
+	rts -> si [color = "blue4"];
+	tss -> ts [style = "dashed" color = "blueviolet" label = "m_script"];
+	rts -> ts [style = "dashed" color = "blueviolet" label = "m_script"];
+}

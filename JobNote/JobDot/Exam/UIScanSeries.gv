@@ -1,0 +1,17 @@
+digraph UIScanSeries {
+    node [shape = "box"]
+
+    uss [label = "UIScanSeries"];
+
+    ucs [label = "UIClusterSeries"];
+    urs [label = "UIReconSeries"];
+    sssp [label = "ScanSeriesSubPanel"]; // no parent
+    ph [label = "ParameterHolder"];
+
+
+    uss -> ph [color = "blue4"];
+
+    uss -> ucs [style = "dashed" color = "blueviolet" label = "clusterVector"];
+    uss -> urs [style = "dashed" color = "blueviolet" label = "reconVector"];
+    uss -> sssp [style = "dashed" color = "blueviolet" label = "parent"];
+}

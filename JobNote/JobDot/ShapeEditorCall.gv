@@ -1,0 +1,13 @@
+digraph ShapeEditorCall{
+    node [shape = "box"]
+
+	mc [label = "ShapeMouseListener.mouseClicked"]
+	mr [label = "ShapeMouseListener.mouseReleased"]
+	sab [label = "ROIToolBox.selectAdjustButton"]
+
+	fsc [label = "fireShapeSelected"]
+
+	mc -> fsc [color = "blue4"]
+	mr -> fsc [color = "blue4"]
+	sab -> fsc [color = "blue4"]
+}

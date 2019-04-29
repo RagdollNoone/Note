@@ -1,0 +1,28 @@
+digraph ExamMessageCall{
+    node [shape = "box"]
+
+    umf_mr [label = "UiMgrFrame.messageReceived"];
+	avs_mr [label = "AbstractViewScanning.messageReceived"];
+	avs_mrsr [label = "AbstractViewScanning.messageReceivedEvScanReady"];
+	avs_mres [label = "AbstractViewScanning.messageReceivedEndScan"];
+	ep_puesr [label = "ExamPanel.promptUserEvScanReady"];
+	adps_as [label = "AbstractDisplayPanelScanning.allowScanning"];
+	ep_tcs [label = "ExamPanel.taskCompletedScanning"];
+	esp_as [label = "ExamScanningPanel.allowScanning"];
+	adps_tcs [label = "AbstractDisplayPanelScanning.taskCompletedScanning"];
+	esp_tcs [label = "ExamScanningPanel.taskCompletedScanning"];
+
+	umf_mr -> avs_mr [color = "blue4"];
+
+	avs_mr -> avs_mrsr [color = "blue4"];
+	avs_mr -> avs_mres [color = "blue4"];
+
+	avs_mrsr -> ep_puesr [color = "blue4"];
+	avs_mres -> adps_as [color = "blue4"];
+	avs_mres -> ep_tcs [color = "blue4"];
+
+	adps_as -> esp_as [color = "blue4"];
+
+	ep_tcs -> adps_tcs [color = "blue4"];
+	adps_tcs -> esp_tcs [color = "blue4"];
+}

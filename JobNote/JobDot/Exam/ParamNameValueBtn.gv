@@ -1,0 +1,25 @@
+digraph ParamNameValueBtn {
+    node [shape = "box"]
+
+    pnvb [label = "ParamNameValueBtn"];
+
+    p [label = "Parameter"];
+    pdsd [label = "ParamDisplaySubDialog"];
+    rsp [label = "ReconSubPanel"]; // 这个变量定义的有问题 要么改成基类
+
+    avb [label = "ANNameValueJButton"];
+    pd [label = "ParameterDisplayer"];
+    al [label = "ActionListener"];
+
+
+    pnvb -> avb [color = "blue4"];
+    pnvb -> pd [color = "blue4"];
+    pnvb -> al [color = "blue4"];
+
+    pnvb -> p [style = "dashed" color = "blueviolet" label = "m_params"];
+    pnvb -> pdsd [style = "dashed" color = "blueviolet" label = "m_dialog"];
+    pnvb -> rsp [style = "dashed" color = "blueviolet" label = "m_parent"];
+
+    pdsd -> p [style = "dashed" color = "blueviolet" label = "m_params"];
+    pdsd -> pnvb [style = "dashed" color = "blueviolet" label = "m_parent"];
+}

@@ -1,0 +1,42 @@
+digraph ExamPanel {
+    node [shape = "box"]
+
+    ep [label = "ExamPanel"]; // ok
+    adps [label = "AbstractDisplayPanelScanning"]; // ok
+    idhrs [label = "InterfaceDisplayHandlerRunScan"]; // no
+
+    esp [label = "ExamScanningPanel"]; //ok
+    eip [label = "ExamImagePanel"]; // no
+
+    ef [label = "ExamFactory"]; // no
+    pp [label = "ProtocolPanel"]; // ok
+
+    sssp [label = "ScanSeriesSubPanel"] // ok
+    pm [label = "ProtocolModel"] // 新开一个文件
+
+    csp [label = "ClusterSubPanel"] // 新开一个文件
+    rsp [label = "ReconSubPanel"] // 新开一个文件
+    pc [label = "ProtocolConfig"]
+    uss [label = "UIScanSeries"] // 新开一个文件
+
+
+    ep -> adps [color = "blue4"];
+    adps -> idhrs [color = "blue4"];
+
+    ep -> esp [style = "dashed" color = "blueviolet" label = "scanningPanel"];
+    ep -> eip [style = "dashed" color = "blueviolet" label = "imagePanel"];
+
+    esp -> ep [style = "dashed" color = "blueviolet" label = "parent"];
+    esp -> ef [style = "dashed" color = "blueviolet" label = "examFactory"];
+    esp -> pp [style = "dashed" color = "blueviolet" label = "panelProtocolDisplay"];
+
+    pp -> sssp [style = "dashed" color = "blueviolet" label = "m_scanSeriesPanelList"];
+    pp -> pm [style = "dashed" color = "blueviolet" label = "m_protocolModel"];
+
+    sssp -> pp [style = "dashed" color = "blueviolet" label = "m_parentPanel"];
+    sssp -> pm [style = "dashed" color = "blueviolet" label = "m_protocolModel"];
+    sssp -> csp [style = "dashed" color = "blueviolet" label = "m_clusterPanelList"];
+    sssp -> rsp [style = "dashed" color = "blueviolet" label = "m_reconPanelList"];
+    sssp -> uss [style = "dashed" color = "blueviolet" label = "m_uiScanSeries"];
+    sssp -> pc [style = "dashed" color = "blueviolet" label = "m_clusterConfig & m_reconConfig"];
+}

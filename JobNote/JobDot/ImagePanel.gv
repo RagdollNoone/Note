@@ -1,0 +1,23 @@
+digraph ImagePanel{
+    node [shape = "box"]
+
+    cip [label = "CommonImagePanel"];
+    mip [label = "MedicalImagePanel"];
+    rt [label = "ROITool"];
+    rtb [label = "ROIToolBox"];
+    se [label = "ShapeEditor"];
+    adtp [label = "AnnotationDisplayTablePanel"]
+
+    cip -> rtb [style = "dashed" color = "blueviolet" label = "toolBox"];
+
+    cip -> adtp [style = "dashed" color = "blueviolet" label = "annotationTblPanel"]
+
+    cip -> mip [style = "dashed" color = "blueviolet" label = "medicalImagePanel"];
+    mip -> rt [style = "dashed" color = "blueviolet" label = "roiTool"];
+    rt -> se [style = "dashed" color = "blueviolet" label = "shapeEditor"];
+
+    se -> mip [style = "dashed" color = "blueviolet" label = "panel"];
+    se -> cip [style = "dashed" color = "blueviolet" label = "m_parentPanel"]
+
+    rtb -> rt [style = "dashed" color = "blueviolet" label = "roiTool"]
+}

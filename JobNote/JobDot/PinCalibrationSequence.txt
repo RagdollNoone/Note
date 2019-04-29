@@ -1,0 +1,77 @@
+@startuml
+ViewPinCalibration -> UiMgrFrame: RUN_PIN_CALIBRATION
+UiMgrFrame -> UiMgr: RUN_PIN_CALIBRATION
+UiMgr -> TaskMgr: RUN_PIN_CALIBRATION
+
+newpage
+
+TaskMgr -> TaskRunPinCalibration: Construct对象
+note left
+还会把TaskRunPinCalibration加入到TaskMgr的taskList
+当中去, 但是taskList派什么用的还不是很清楚
+end note
+
+note left
+TaskRunPinCalibration自启一个线程启动任务, 并处理消息流
+业务逻辑主函数performPinCalibrationCase
+end note
+
+note right
+扫描的数据是怎么添加到TaskRunPinCalibration当中去的
+end note
+
+TaskRunPinCalibration -> SC: RunSetPinEntry
+note left
+setPinEntryStartCase函数发送
+猜测放在这个时机, 其实做的是一次握手
+验证数据spr的合法性
+end note
+
+SC -> TaskMgr: END_SET_PIN_ENTRY
+note left
+taskRunPinCalibration会
+空循环等待这条消息, 直到超时
+如果收到, 最终调用taskRunPinCalibration的
+messageReceivedEndSetPinEntry
+end note
+
+TaskRunPinCalibration -> UiMgr: RUN_IMAGE_PREP
+UiMgr -> TaskMgr: END_IMAGE_PREP
+note left
+UiMgr发布消息的路径是写死的
+只会发送到taskMgr去
+如果只是Uimgr和taskMgr的通信
+可能不会走dispatcher, 因为各自有各自的接口
+end note
+
+TaskRunPinCalibration -> SC: RUN_TB_MV_HZ
+SC -> TaskMgr: END_TB_MV_HZ
+
+TaskRunPinCalibration -> SC: RUN_AIR_SCAN
+SC -> TaskMgr: EV_AIR_SCAN_READY
+TaskMgr -> SC: StartScAirScan
+loop
+SC -> SystemMgr: EV_XRAY
+end
+SC -> TaskMgr: EV_AIR_SCAN_END
+SC -> TaskMgr: END_AIR_SCAN
+
+TaskRunPinCalibration -> SC: RUN_SCAN
+note left
+可能会调整病床位置
+end note
+SC -> TaskMgr: EV_SCAN_READY
+TaskRunPinCalibration -> UiMgr: IMAGE_ACK_PREP
+note left
+奇怪的是没有做任何的处理
+end note
+
+TaskMgr -> SC: StartScScan
+loop
+SC -> SystemMgr: EV_XRAY
+end
+SC -> TaskMgr: EV_CLUSTER_END
+SC -> TaskMgr: EV_PIN_ALG
+SC -> TaskMgr: END_SCAN
+
+@enduml

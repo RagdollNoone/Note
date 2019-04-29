@@ -1,0 +1,33 @@
+digraph ProtocolModel {
+    node [shape = "box"]
+
+    pm [label = "ProtocolModel"];
+
+    ef [label = "ExamFactory"];
+    uss [label = "UIScanSeries"];
+    pc1 [label = "ProtocolConfig"];
+    pc2 [label = "ProtocolConfig"];
+    pc3 [label = "ProtocolConfig"];
+    pc4 [label = "ProtocolConfig"];
+    pc5 [label = "ProtocolConfig"];
+    pc6 [label = "ProtocolConfig"];
+    pc7 [label = "ProtocolConfig"];
+    pc8 [label = "ProtocolConfig"];
+    pc9 [label = "ProtocolConfig"];
+    dm [label = "DataMgr"];
+
+
+    pm -> ef [style = "dashed" color = "blueviolet" label = "s_examFactory"];
+    pm -> uss [style = "dashed" color = "blueviolet" label = "m_uiScanSeriesVector"];
+    pm -> dm [style = "dashed" color = "blueviolet" label = "m_dataMgr"];
+    pm -> pc1 [style = "dashed" color = "blueviolet" label = "clusterAxial"];
+    pm -> pc2 [style = "dashed" color = "blueviolet" label = "reconAxial"];
+    pm -> pc3 [style = "dashed" color = "blueviolet" label = "clusterTopo"];
+    pm -> pc4 [style = "dashed" color = "blueviolet" label = "reconTopo"];
+    pm -> pc5 [style = "dashed" color = "blueviolet" label = "clusterSpiral"];
+    pm -> pc6 [style = "dashed" color = "blueviolet" label = "reconSpiral"];
+    pm -> pc7 [style = "dashed" color = "blueviolet" label = "clusterCine"];
+    pm -> pc8 [style = "dashed" color = "blueviolet" label = "reconCine"];
+    pm -> pc9 [style = "dashed" color = "blueviolet" label = "clusterTime"];
+
+}

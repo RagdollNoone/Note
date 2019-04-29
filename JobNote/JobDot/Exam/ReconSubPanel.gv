@@ -1,0 +1,24 @@
+digraph ReconSubPanel {
+    node [shape = "box"]
+
+    rsp [label = "ReconSubPanel"];
+    asp [label = "AbstractSubPanel"];
+
+    urs [label = "UIReconSeries"];
+    sssp [label = "ScanSeriesSubPanel"]; // no parent
+    pvb [label = "ParamNameValueBtn"]; // 新开一个文件
+
+    acrs [label = "AbstractUIClusterUIReconSeries"]
+    p [label = "Parameter"]
+    ph [label = "ParameterHolder"]
+
+    rsp -> asp [color = "blue4"];
+    rsp -> urs [style = "dashed" color = "blueviolet" label = "UIReconSeries"];
+    rsp -> sssp [style = "dashed" color = "blueviolet" label = "m_parentPanel"];
+    rsp -> pvb [style = "dashed" color = "blueviolet" label = "m_btns"];
+
+    urs -> acrs [color = "blue4"];
+
+    acrs -> p [style = "dashed" color = "blueviolet" label = "m_paramHashtable"];
+    acrs -> ph [style = "dashed" color = "blueviolet" label = "holder"];
+}

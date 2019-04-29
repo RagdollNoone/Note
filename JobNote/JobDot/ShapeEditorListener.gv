@@ -1,0 +1,12 @@
+digraph ShapeEditorListener{
+    node [shape = "box"]
+
+	sel [label = "ShapeEditorListener"];
+    rt [label = "ROITool"];
+    rtb [label = "ROIToolBox"];
+    adtp [label = "AnnotationDisplayTablePanel"]
+
+	rt -> sel [color = "blue4"]
+	rtb -> sel [color = "blue4"]
+	adtp -> sel [color = "blue4"]
+}

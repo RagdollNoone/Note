@@ -1,0 +1,20 @@
+digraph PinCalibration{
+    node [shape = "box"]
+
+    vpc [label = "ViewPinCalibration"]; // ok
+    av [label = "AbstractView"]; // no
+    pcp [label = "PinCalibrationPanel"]; // ok
+    pctp [label = "PinCalibrationTablePanel"]; // ok
+    pct [label = "PinCalibrationTable"]; // no
+    jb [label = "JTable"]; // no
+
+
+    vpc -> av [color = "blue4"];
+    av -> pcp [style = "dashed" color = "blueviolet" label = "gui"];
+
+    pcp -> pctp [style = "dashed" color = "blueviolet" label = "tablePanel"];
+
+    pctp -> pcp [style = "dashed" color = "blueviolet" label = "parent"];
+    pctp -> pct [style = "dashed" color = "blueviolet" label = "pinCalibrationTable_data"];
+    pctp -> jb [style = "dashed" color = "blueviolet" label = "pinCalibrationTable_gui"];
+}

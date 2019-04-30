@@ -4,3 +4,6 @@ digraph JAppletApplet{
     a1 [label = "JApplet是啥" style = "filled" fillcolor = "red"];
     a2 [label = "Applet是啥" style = "filled" fillcolor = "red"];
 }
+
+// applet是一个网页上面能执行的小程序
+// 任何applet必须继承自Applet类

@@ -4,9 +4,9 @@ ravindrababu ravula Computer Network
 ## lesson1
 
 * ip地址是怎么构成的
-网络号
-主机号
-端口号 (web端口通常设为80)
+1.网络号
+2.主机号
+3.端口号 (web端口通常设为80)
 
 
 * ip地址的分类

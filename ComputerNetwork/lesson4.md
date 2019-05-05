@@ -1,7 +1,7 @@
 ravindrababu ravula Computer Network
 ====================================
 
-# lesson4
+## lesson4
 
 * question
 
@@ -27,9 +27,3 @@ NetWorkID,	Subnet Mask,	Interface
 
 这样路由表就少了一项, 而且200.1.2.0的这个网络能够拥有128主机号
 ```
-
-
-
-
-
-

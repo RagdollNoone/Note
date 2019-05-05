@@ -1,7 +1,7 @@
 ravindrababu ravula Computer Network
 ====================================
 
-# lesson16
+## lesson16
 
 * Access control method
 
@@ -19,6 +19,6 @@ Carrier Sense Multiple Access with Collision Detection
 注意这种协议, 接收端是没有ACK返回的
 
 需要关注的点有:
-1)这种协议的传输效率
-2)根据效率公式, 能推断出这种协议适合什么网络, 发送多长的数据包是合适的
+1. 这种协议的传输效率
+2. 根据效率公式, 能推断出这种协议适合什么网络, 发送多长的数据包是合适的
 ```

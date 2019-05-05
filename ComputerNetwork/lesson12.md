@@ -1,7 +1,7 @@
 ravindrababu ravula Computer Network
 ====================================
 
-# lesson12
+## lesson12
 
 * channel/wire/link
 

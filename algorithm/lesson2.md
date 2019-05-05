@@ -1,36 +1,38 @@
 ravindrababu ravula Algorithms
 ==============================
 
-# lesson2
+## lesson2
 
 * 时间复杂度的计算分类
 
-```txt
-1.iterative
-2.recursive
-```
+1. iterative
+2. recursive
 
-## iterative
+### iterative
 
 ```cpp
 void function(int n)
 {
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < n; i++) {
     	// todo something here
+	}
 }
 ```
 
-## recursive
+### recursive
 
 ```cpp
 void function(int n)
 {
-	if(SomeCondition)
+	if(SomeCondition) {
     	function(n/2);
+	}
 }
 ```
 
+### 总结
+
 ```txt
-可以看到递归的核心是把输入集合的规模降下来
+递归的核心是把输入集合的规模降下来
 这两种模式的时间复杂度是不同的
 ```

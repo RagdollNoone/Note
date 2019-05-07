@@ -22,6 +22,8 @@ public class WeatherData {
         // display是用来显示数据变化的具体对象
         // 这样设计会导致每次添加删除具体的对象就要修改这里的代码
         // update的参数被绑定了, 如果要扩展, 将会变得相当困难
+        // 所以需要观察者模式, 通过添加新的观察者, 实现代码的扩展
+        // 而不用每次修改WeatherData类
         display1.update(temperature, humidity, pressure);
         display2.update(temperature, humidity, pressure);
         display3.update(temperature, humidity, pressure);
@@ -69,10 +71,9 @@ get方法, 拉的优势在于, update的扩展性变强了, 应为参数不
 专注于代码的松耦合, 应对可能发生的变化
 ```
 
-
-
 ## 扩展
 * 出版者一般称为"主题", subject; 订阅者称为"观察者", Observer;
+* 怎么去设定观察者之间的依赖关系
 
 
 ## idea

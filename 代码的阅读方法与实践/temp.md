@@ -267,3 +267,125 @@ char *inet_ntoa(int a, int b, int c, int d) {
 ```
 
 函数指针
+c语言不允许把函数作为参数传递给另外的方法, 但是允许传递指针
+很多库函数接受函数指针作为参数
+可以设定代码体内的控制, 比如一个打开的文件用什么那种close函数关闭
+
+
+How
+```txt
+先要声明函数指针， 虽然没有强制要求, 但是一般函数指针名和实
+际调用的函数名之间要么相同, 要么有联系
+
+如果函数指针本身也需要外部传入参数, 那么
+在另一个方法调用的时候, 只写方法名称, 并不会在此刻指定函数指针的参数
+而是实际运行到另一个方法内部的时候才做这件事情
+```
+
+```c++
+// 关注getfile的调用
+
+// 声明函数指针
+static void	 xtrmapskip __P((char *, long));
+static void	 xtrskip __P((char *, long));
+
+// 在主线函数中调用getfile
+// xtrmap, xtrmapskip指的是实际的函数名
+getfile(xtrmap, xtrmapskip);
+
+// getfile的具体实现
+void
+getfile(fill, skip)
+	void	(*fill) __P((char *, long));
+	void	(*skip) __P((char *, long));
+{
+    // 传递参数给函数指针的时刻, 省略了其他部分的代码
+    (*fill)((char *)buf, (long)(size > TP_BSIZE ? fssize : (curblk - 1) * TP_BSIZE + size));
+    (*skip)(clearedbuf, (long)(size > TP_BSIZE ? TP_BSIZE : size));
+}
+
+
+static void
+xtrmap(buf, size)
+	char	*buf;
+	long	size;
+{
+
+	memmove(map, buf, size);
+	map += size;
+}
+
+static void
+xtrmapskip(buf, size)
+	char *buf;
+	long size;
+{
+
+	panic("hole in map\n");
+	map += size;
+}
+```
+
+用作别名
+
+从效率上来说, 拷贝一个较大的结构体的代价是不能和拷贝一个4字节的地址相比拟的
+所以我们有些时候会定义一个结构体指针来接受结构体对象
+```c++
+static struct termios cbreakt, rawt, *curt;
+
+// do somthing here
+
+curt = useraw ? &raw : &cbreakt;
+```
+
+引用静态初始化函数
+```c++
+char *s;
+
+// do something here
+s = *(opt->bval) ? "True" : "False";
+```
+
+全局语境中实现变量引用语义(TODO: 不太懂, 没有看出来好处在那里)
+
+指针和字符串
+注意区分字符指针和字符数组, 应为传参后两者类型相同了, 但是底层执行的操作不同
+
+```c++
+size_t FunctionPointer::strlen(const char *str) {
+    const char *s;
+
+//    int myNull = 0;
+
+    // 不能用s比较, 关心的问题是NULL和\0有什么区别
+    // 因为字符串常量末尾插入的是\0
+//    printf("s == NULL: %s\n", str == NULL);
+//    printf("s == 0: %s\n", str == 0);
+//    printf("s == myNull: %s", str == myNull); // 编译错误
+
+    // 下面这句话表达的是不停的向后移动字符串的首地址
+    for (s = str; *s; ++s) {
+//        printf("just for break\n");
+    }
+
+    return (s - str);
+}
+
+void FunctionPointer::howToUseStrlen() {
+    char array[10] = "";
+    cout << "char array length is: " << FunctionPointer::strlen(array) << endl;
+    array[0] = 'L';
+    for (int i = 0; i < sizeof(array) / sizeof(array[0]); i++) {
+        cout << array[i];
+    }
+    cout << endl;
+
+    char *s = "Hello World";
+    char s_array[12] = "Hello World";
+    cout << "s length is: " << FunctionPointer::strlen(s) << endl;
+//    s = &s_array[0];
+    s[0] = 'L'; // 越权处理字符串常量, 这东西写保护, 程序异常退出, 打开上面这句注释就可以修改了
+    cout << "Use cout print s: " << s << endl;
+    printf("Use printf print s: %s\n", s);
+}
+```

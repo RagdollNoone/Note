@@ -389,3 +389,235 @@ void FunctionPointer::howToUseStrlen() {
     printf("Use printf print s: %s\n", s);
 }
 ```
+
+直接内存访问
+低级代码会直接通过指针访问硬件设备, 下面是一段例子
+
+```c++
+static int vid_xpos=0, vid_ypos=0;
+
+static void
+vid_wrchar(char c)
+{
+	volatile unsigned short *video;
+
+	video = (unsigned short *)(0xe08b8000) + vid_ypos * 80 + vid_xpos;
+	*video = (*video & 0xff00) | 0x0f00 | (unsigned short)c;
+}
+```
+
+结构被用来
+```txt
+将作为一个整体使用的数据集合到一起
+函数返回多个数据元素
+构造链式数据结构
+映射数据在硬件设备, 网络链接和存储介质上的组织方式
+实现抽象数据类型
+面向对象的方式编程
+```
+函数返回多个数据元素
+两种方法实现
+1. 多个类型组合成一个结构, 返回结构(返回有开销, 越是大越是频繁, 越是不划算)
+2. 通过引用参数返回分支函数的结果
+
+映射数据表达方式
+
+Intel EtherExpress网卡的一个命令块
+```c++
+// volatile限定符表明底层的内存字段要被程序之外的实体引用
+// 在这里指的就是网卡
+// 从而禁止编译器对这些字段优化(比如移除多余的引用)
+struct fxp_cb_nop {
+	void *fill[2];
+	volatile u_int16_t cb_status;
+	volatile u_int16_t cb_command;
+	volatile u_int32_t link_addr;
+};
+```
+
+某些情况下程序中会声明位字段(bit field), 用来指定一段精确的范围
+保存给设备上的特定值
+
+```c++
+struct fxp_cb_config {
+	void *fill[2];
+	volatile u_int16_t	cb_status;
+	volatile u_int16_t	cb_command;
+	volatile u_int32_t	link_addr;
+	volatile u_int8_t	byte_count:6,
+				:2;
+	volatile u_int8_t	rx_fifo_limit:4,
+				tx_fifo_limit:3,
+				:1;
+	volatile u_int8_t	adaptive_ifs;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	rx_dma_bytecount:7,
+				:1;
+	volatile u_int8_t	tx_dma_bytecount:7,
+				dma_bce:1;
+	volatile u_int8_t	late_scb:1,
+				:1,
+				tno_int:1,
+				ci_int:1,
+				:3,
+				save_bf:1;
+	volatile u_int8_t	disc_short_rx:1,
+				underrun_retry:2,
+				:5;
+	volatile u_int8_t	mediatype:1,
+				:7;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	:3,
+				nsai:1,
+				preamble_length:2,
+				loopback:2;
+	volatile u_int8_t	linear_priority:3,
+				:5;
+	volatile u_int8_t	linear_pri_mode:1,
+				:3,
+				interfrm_spacing:4;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	promiscuous:1,
+				bcast_disable:1,
+				:5,
+				crscdt:1;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	:8;
+	volatile u_int8_t	stripping:1,
+				padding:1,
+				rcv_crc_xfer:1,
+				:5;
+	volatile u_int8_t	:6,
+				force_fdx:1,
+				fdx_pin_en:1;
+	volatile u_int8_t	:6,
+				multi_ia:1,
+				:1;
+	volatile u_int8_t	:3,
+				mc_all:1,
+				:4;
+};
+```
+
+用于tcp包的定义
+```c++
+typedef u_int32_t tcp_seq;
+/*
+ * TCP header.
+ * Per RFC 793, September, 1981.
+ */
+struct tcphdr {
+	u_int16_t th_sport;		/* source port */
+	u_int16_t th_dport;		/* destination port */
+	tcp_seq	  th_seq;		/* sequence number */
+	tcp_seq	  th_ack;		/* acknowledgement number */
+#if BYTE_ORDER == LITTLE_ENDIAN
+	u_int8_t  th_x2:4,		/* (unused) */
+		  th_off:4;		/* data offset */
+#endif
+#if BYTE_ORDER == BIG_ENDIAN
+	u_int8_t  th_off:4,		/* data offset */
+		  th_x2:4;		/* (unused) */
+#endif
+	u_int8_t  th_flags;
+#define	TH_FIN	  0x01
+#define	TH_SYN	  0x02
+#define	TH_RST	  0x04
+#define	TH_PUSH	  0x08
+#define	TH_ACK	  0x10
+#define	TH_URG	  0x20
+	u_int16_t th_win;			/* window */
+	u_int16_t th_sum;			/* checksum */
+	u_int16_t th_urp;			/* urgent pointer */
+};
+```
+
+结构还应用于映射数据在外设介质上(比如磁盘和磁带)的存储方式
+如DOS磁盘分区的磁盘特性由所谓的BIOS参数块来决定(BIOS parameter
+block), 结构如下所示
+```c++
+/*
+ * BIOS Parameter Block (BPB) for DOS 3.3
+ * 33应该指的就是版本号
+ * 结构内的字段次序依赖所处的架构和编译器
+ * 元素的表达依赖于架构和操作系统(操作系统可能会强制处理器采用某种字节次序)
+ * 即使简单数据类型, 如整形, 字节的存储方式也会不同
+ * 所以结构映射外部数据, 天生不可移植
+ */
+struct bpb33 {
+	u_int16_t	bpbBytesPerSec;	/* bytes per sector */
+	u_int8_t	bpbSecPerClust;	/* sectors per cluster */
+	u_int16_t	bpbResSectors;	/* number of reserved sectors */
+	u_int8_t	bpbFATs;	/* number of FATs */
+	u_int16_t	bpbRootDirEnts;	/* number of root directory entries */
+	u_int16_t	bpbSectors;	/* total number of sectors */
+	u_int8_t	bpbMedia;	/* media descriptor */
+	u_int16_t	bpbFATsecs;	/* number of sectors per FAT */
+	u_int16_t	bpbSecPerTrack;	/* sectors per track */
+	u_int16_t	bpbHeads;	/* number of heads */
+	u_int16_t	bpbHiddenSecs;	/* number of hidden sectors */
+};
+```
+
+面向对象编程
+
+用c语言描述一个类
+```c++
+// 函数指针其实可以理解为成员函数
+// 而这个成员函数, 如果有需要的话, 可以是多态的, 在实际创建的时候指明
+// 具体是那个函数
+struct	domain {
+	int	dom_family;		/* AF_xxx */
+	char	*dom_name;
+	void	(*dom_init)		/* initialize domain data structures */
+			__P((void));
+	int	(*dom_externalize)	/* externalize access rights */
+			__P((struct mbuf *));
+	void	(*dom_dispose)		/* dispose of internalized rights */
+			__P((struct mbuf *));
+	struct	protosw *dom_protosw, *dom_protoswNPROTOSW;
+	struct	domain *dom_next;
+	int	(*dom_rtattach)		/* initialize routing table */
+			__P((void **, int));
+	int	dom_rtoffset;		/* an arg to rtattach, in bits */
+	int	dom_maxrtkey;		/* for routing layer */
+};
+
+// 实际的调用
+// domain在调用过程中表现的像基类, 而dom_rtattach似乎是多态的
+for (dom = domains; dom; dom = dom->dom_next)
+	if (dom->dom_family == i && dom->dom_rtattach) {
+		dom->dom_rtattach((void **)&nep->ne_rtable[i],
+			dom->dom_rtoffset);
+		break;
+	}
+```
+
+不同对象共享方法, 暂时的理解是为了继承来自基类的非抽象方法
+
+```c++
+struct file {
+	LIST_ENTRY(file) f_list;/* list of active files */
+	short	f_flag;		/* see fcntl.h */
+#define	DTYPE_VNODE	1	/* file */
+#define	DTYPE_SOCKET	2	/* communications endpoint */
+	short	f_type;		/* descriptor type */
+	short	f_count;	/* reference count */
+	short	f_msgcount;	/* references from message queue */
+	struct	ucred *f_cred;	/* credentials associated with descriptor */
+	struct	fileops {
+		int	(*fo_read)	__P((struct file *fp, struct uio *uio,
+					    struct ucred *cred));
+		int	(*fo_write)	__P((struct file *fp, struct uio *uio,
+					    struct ucred *cred));
+		int	(*fo_ioctl)	__P((struct file *fp, u_long com,
+					    caddr_t data, struct proc *p));
+		int	(*fo_poll)	__P((struct file *fp, int events,
+					    struct proc *p));
+		int	(*fo_close)	__P((struct file *fp, struct proc *p));
+	} *f_ops;
+	off_t	f_offset;
+	caddr_t	f_data;		/* vnode or socket */
+};
+```

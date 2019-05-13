@@ -10,3 +10,6 @@ socks_proxy="socks://127.0.0.1:36681/"
 
 sudo gedit /etc/apt/apt.conf
 用#注释掉proxy所在的行
+
+
+Unix下的ps或top命令可以用来检查内存泄露

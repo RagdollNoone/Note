@@ -621,3 +621,203 @@ struct file {
 	caddr_t	f_data;		/* vnode or socket */
 };
 ```
+
+
+共用体/联合体
+
+```txt
+有效的利用存储空间
+实现多态
+使用不同的内部表达式对数据进行访问
+```
+
+```c++
+// 其实往往是需要多态加有效利用存储空间
+// 否则没有非要选union的必要
+/*
+ * Body of an rpc request call.
+ */
+struct call_body {
+	u_int32_t cb_rpcvers;	/* must be equal to two */
+	u_int32_t cb_prog;
+	u_int32_t cb_vers;
+	u_int32_t cb_proc;
+	struct opaque_auth cb_cred;
+	struct opaque_auth cb_verf; /* protocol specific - provided by client */
+};
+
+/*
+ * The rpc message
+ * 要么是call, 要么是reply
+ */
+struct rpc_msg {
+	u_int32_t		rm_xid;
+	enum msg_type		rm_direction;
+	union {
+		struct call_body RM_cmb;
+		struct reply_body RM_rmb;
+	} ru;
+#define	rm_call		ru.RM_cmb
+#define	rm_reply	ru.RM_rmb
+};
+#define	acpted_rply	ru.RM_rmb.ru.RP_ar
+#define	rjcted_rply	ru.RM_rmb.ru.RP_dr
+
+
+// 实际调用
+// rpc_callmsg.c
+// 可以看到当类型是CALL的时候, rm_call的结构对象应该是call_body
+// 应为有字段cb_rpcvers
+if (cmsg->rm_direction != CALL) {
+	return (FALSE);
+}
+IXDR_PUT_LONG(buf, cmsg->rm_call.cb_rpcvers);
+```
+访问不同的内部表达(不是很明白)
+暂时的理解是union包上一个struct和一个访问变量
+但是为什么一定要这么做不是很懂
+
+```c++
+double
+frexp(value, eptr)
+	double value;
+	int *eptr;
+{
+	union {
+                double v;
+                struct {
+                        u_int  u_sign :  1;
+			u_int   u_exp : 11;
+			u_int u_mant1 : 20;
+			u_int u_mant2 : 32;
+                } s;
+        } u;
+
+	if (value) {
+		u.v = value;
+		*eptr = u.s.u_exp - 1022;
+		u.s.u_exp = 1022;
+		return(u.v);
+	} else {
+		*eptr = 0;
+		return((double)0);
+	}
+}
+```
+
+动态分配内存
+
+
+```c++
+typedef struct {
+	char *user;
+	char *group;
+	char *flags;
+	char data[1];
+} NAMES;
+```
+
+每次malloc都需要检查内存空间是否达到上线, 所以会对malloc做一层封装
+常起名xmalloc
+
+```c++
+/*
+ * malloc with result test
+ */
+void *
+xmalloc(size)
+	u_int size;
+{
+	void *p;
+
+	if ((p = malloc(size)) == NULL)
+		err(FATAL, "%s", strerror(errno));
+	return (p);
+}
+```
+
+初学者对指针的常见误解是: 所有指针必须初始化为由malloc分配的内存快
+这种代码风格没错, 但是难以阅读和维护
+TODO： 怎么才算好的写法？
+
+垃圾回收机制
+对于不同变量共享一块内存块, 就会难以跟踪他们的生存周期,
+所以每个内存块会关联一个引用计数, 每次创建该内存块的新引用时
+都会递增计数, 每销毁一个引用, 计数会递减, 当计数为0是说明内
+存块可以释放, 下面代码是一个带有引用的设计
+
+```c++
+typedef struct _SelectRec {
+    Atom selection; 			/* constant */
+    Display *dpy; 			/* constant */
+    Widget widget;
+    Time time;
+    unsigned long serial;
+    XtConvertSelectionProc convert;
+    XtLoseSelectionProc loses;
+    XtSelectionDoneProc notify;
+    XtCancelConvertSelectionProc owner_cancel;
+    XtPointer owner_closure;
+    PropList prop_list;
+    Request req;			/* state for local non-incr xfer */
+    int ref_count;			/* of active transfers */
+    unsigned int incremental:1;
+    unsigned int free_when_done:1;
+    unsigned int was_disowned:1;
+} SelectRec;
+```
+
+保守垃圾回收器
+扫描进程所有的内存, 寻找与现有分配内存块相匹配的地址.
+将扫描中没有遇到的所有内寻块都释放掉
+
+malloc和alloca
+malloc在heap上分配
+alloca在stack上分配(非标准函数, 标准啥意思?)
+优点：
+stack上分配的内存在函数返回时自动被回收,
+减少了偶然的内存泄漏
+缺点：
+记录在这个内存块中的计算结果永远不能返回给调用者
+不可移植的
+
+
+typedef
+这个关键字声明促进抽象, 促进代码可读性
+有些typedef会有些难以理解
+
+```c++
+// typedef可以看作是static或extern
+// 可以理解为一个char型数组的别名
+// 这里的line就是一个char型的数组
+typedef char ut_line_t[UT_LINESIZE];
+static ut_line_t line[MAXUSERS];
+```
+
+可以使得代码有移植性
+因为即使是基本的数据类型在不同的架构下的内存表达也是不同的
+所以需要下面的语句来屏蔽这些差异
+
+```c++
+#ifdef AVR_32
+typedef unsigned int  uint_32
+#else
+typedef unsigned long uint_32
+#endif
+```
+
+为什么代码要写成这样的形式
+
+```c++
+// 好处就是, 很容易使用正则表达式语句来检索出函数的声明和定义的位置
+// grep -rn "^\<functionName\>" --include \*.c
+void
+functionName() {
+
+}
+```
+
+工具idutils
+
+查找关键字Select在那些头文件当中出现过
+grep -lr "Select" --include \*.h

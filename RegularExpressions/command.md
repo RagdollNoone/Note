@@ -182,3 +182,12 @@ egrep "^A?" test.md
 
 * 搜索一个类的字段
 > (^|\.)FieldOfClass([^a-zA-Z_]|$)
+
+* 在所有的.h文件当中检索声明
+> grep -rn "KeyWordHere" --include \*.h
+
+* 搜索函数实体fpu_sqrt(函数名另起一行的编码风格的好处)
+> grep -rn "^\<fpu_sqr\>" fpu_sqrt.c
+
+* 搜索t1在那里被赋值
+> grep -rn "t1.*[^=]=[^=]" fpu_sqrt.c

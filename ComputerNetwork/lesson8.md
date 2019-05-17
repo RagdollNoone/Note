@@ -1,9 +1,9 @@
 ravindrababu ravula Computer Network
 ====================================
 
-# lesson8
+## lesson8
 
-* question
+* question1
 
 ```txt
 如果一台主机不是用作路由器的
@@ -19,7 +19,7 @@ A需要知道自己和B是不是在同一个网络
 但即使不在同一网段, 也有可能在屋里层面上属于同一个网络
 ```
 
-* question
+* question2
 
 ```txt
 为什么我们看到的子网掩码的配置是会有255.255.255.255?
@@ -29,7 +29,7 @@ A和B在同一个网段
 所以使用这个子网掩码 能使得A向B发出的包总是经过路由器转发
 ```
 
-* question
+* question3
 
 ```txt
 给出一个广播地址

@@ -1,7 +1,7 @@
 ravindrababu ravula Computer Network
 ====================================
 
-# lesson18
+## lesson18
 
 * 传输延时的转换
 
@@ -9,7 +9,7 @@ ravindrababu ravula Computer Network
 三种单位 m(米), bits, s(秒)
 m / v(波的传播速度) = s = bits / bw(带宽)
 
-eg: 
+eg:
 已知10bits, bw = 4mbps, v = 2 * 10^8(m/s) 求m
 m = bits / bw * v
   = 10 / (4 * 10^6) * 2 * 10^8 = 500m

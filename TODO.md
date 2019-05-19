@@ -1,7 +1,14 @@
-* Unix操作系统注释
-* Apache Web服务器
-* Perl语言
-* BIND域名服务器
-* sendmail邮件传输代理程序
-* NetBSD(Unix操作系统)
-* 
+## how to use
+https://medium.com/
+
+## 编程博客
+https://eli.thegreenplace.net/
+https://eklitzke.org/
+https://www.fluentcpp.com/
+https://preshing.com/
+
+## 计算机网络问题收藏
+- Why is sin_addr inside the structure in_addr?
+    https://stackoverflow.com/questions/13979150/why-is-sin-addr-inside-the-structure-in-addr/13979177
+- Reasoning behind C sockets sockaddr and sockaddr_storage
+    https://stackoverflow.com/questions/16010622/reasoning-behind-c-sockets-sockaddr-and-sockaddr-storage

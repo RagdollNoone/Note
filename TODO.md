@@ -14,9 +14,19 @@ https://preshing.com/
     https://stackoverflow.com/questions/16010622/reasoning-behind-c-sockets-sockaddr-and-sockaddr-storage
 
 select模型服务端
+
 内存代理
+
 临界区锁
+
 多线程
+
 精准计时器
 
 .xmind文件对应哪个app
+
+16位ip
+
+32位eip
+
+64位rip

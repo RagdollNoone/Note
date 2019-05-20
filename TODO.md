@@ -30,22 +30,26 @@ https://preshing.com/
 	https://pdos.csail.mit.edu/6.828/2014/schedule.html
 	https://pdos.csail.mit.edu/6.828/2014/xv6/book-rev8.pdf
 
+## UML
+- 软件名
+    VisualParadigm
+
+- 读图
+    https://www.cnblogs.com/shindo/p/5579191.html
+
+## XMind
+
 ## Temp
 
+```txt
+状态机和状态图
 select模型服务端
-
 内存代理
-
 临界区锁
-
 多线程
-
 精准计时器
-
 .xmind文件对应哪个app
-
 16位ip
-
 32位eip
-
 64位rip
+```

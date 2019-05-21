@@ -12,6 +12,11 @@ https://preshing.com/
     https://stackoverflow.com/questions/13979150/why-is-sin-addr-inside-the-structure-in-addr/13979177
 - Reasoning behind C sockets sockaddr and sockaddr_storage
     https://stackoverflow.com/questions/16010622/reasoning-behind-c-sockets-sockaddr-and-sockaddr-storage
+- socket connect() vs bind()
+    https://stackoverflow.com/questions/27014955/socket-connect-vs-bind
+- Difference between “return 0” and “exit (0)”
+    https://stackoverflow.com/questions/17383015/difference-between-return-0-and-exit-0
+
 
 ## Need To Read
 

@@ -23,7 +23,6 @@ https://preshing.com/
 - 鸟哥的linux私房菜
 	http://cn.linux.vbird.org/
 
-
 - 数据库设计那些事
 	https://www.imooc.com/learn/117
 
@@ -57,4 +56,6 @@ select模型服务端
 16位ip
 32位eip
 64位rip
+http://beej.us/guide/bgnet/examples/ 网络的例子
+okular pdf mac
 ```

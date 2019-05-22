@@ -2,6 +2,7 @@ BeejNetwork
 ===========
 
 socket本质上是文件描述符(file descriptors)
+TODO: fork和close的组合使用
 
 ## 数据结构
 
@@ -283,4 +284,51 @@ if ((numbytes = recv(sockfd, buf, MAXDATASIZE - 1, 0)) == -1) {
 
 buf[numbytes] = '\0';
 printf("client: received '%s'\n", buf);
+```
+
+* close, shutdown
+
+```c++
+// 会释放资源
+close(sockfd);
+
+// 不会释放资源
+// 0 不允许再接收数据
+// 1 不允许再传送数据
+// 2 不 允 许 再 传 送 与 接 收 数 据 [ 就 像 close()]
+int shutdown(int sockfd, int how);
+```
+
+* getpeername
+
+```c++
+#include <sys/socket.h>
+
+// getpeername() 函 数 会 告 诉 你 另 一 端 连 接 的 stream socket 是 谁 ,
+int getpeername(int sockfd, struct sockaddr *addr, int *addrlen);
+```
+
+* fcntl
+
+```c++
+#include <unistd.h>
+#include <fcntl.h>
+
+sockfd = socket(PF_INET, SOCK_STREAM, 0);
+
+// 刚创建的socket是block的, 所以需要这个函数改变状态
+fcntl(sockfd, F_SETFL, O_NONBLOCK);
+```
+
+* select
+
+```c++
+// accept正在进来连接的同时, 不断读取已经建立的socket连接
+// accept和read都会block socket所以这个需求有难点
+
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 ```

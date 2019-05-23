@@ -16,6 +16,10 @@ https://preshing.com/
     https://stackoverflow.com/questions/27014955/socket-connect-vs-bind
 - Difference between “return 0” and “exit (0)”
     https://stackoverflow.com/questions/17383015/difference-between-return-0-and-exit-0
+- What is “standard input”?
+    https://stackoverflow.com/questions/19540425/what-is-standard-input
+- Select function in socket programming
+    https://stackoverflow.com/questions/4171270/select-function-in-socket-programming
 
 
 ## Need To Read
@@ -33,10 +37,13 @@ https://preshing.com/
 	https://pdos.csail.mit.edu/6.828/2012/xv6.html
 	https://pdos.csail.mit.edu/6.828/2014/schedule.html
 	https://pdos.csail.mit.edu/6.828/2014/xv6/book-rev8.pdf
+- 状态机
+    https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
+
 
 ## UML
-- 软件名
-    VisualParadigm
+- Need Read
+    https://www.quora.com/What-is-the-best-way-to-learn-UML
 
 - 读图
     https://www.cnblogs.com/shindo/p/5579191.html
@@ -47,15 +54,16 @@ https://preshing.com/
 
 ```txt
 状态机和状态图
-select模型服务端
 内存代理
 临界区锁
 多线程
 精准计时器
-.xmind文件对应哪个app
 16位ip
 32位eip
 64位rip
 http://beej.us/guide/bgnet/examples/ 网络的例子
 okular pdf mac
+微服务 microservice
+事务 transaction
+活动 activity
 ```

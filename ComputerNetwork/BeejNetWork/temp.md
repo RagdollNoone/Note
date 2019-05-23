@@ -325,10 +325,46 @@ fcntl(sockfd, F_SETFL, O_NONBLOCK);
 ```c++
 // accept正在进来连接的同时, 不断读取已经建立的socket连接
 // accept和read都会block socket所以这个需求有难点
+// select可以理解为一个轮询的等待, 当超时或者指定文件描述符产生消息时break
+// 并执行之后的逻辑
 
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+FD_SET(int fd, fd_set *set); //  将 fd 新 增 到 set。
+FD_CLR(int fd, fd_set *set); //  从 set 移 除 fd。
+FD_ISSET(int fd, fd_set *set); //  若 fd 在 set 中 , 返 回 true。
+FD_ZERO(fd_set *set); //  将 set 整 个 清 为 零 。
+
 int select(int numfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+
+// 用法
+#include <sys/time.h>
+#include <sys/types.h>
+#include <stdio.h>
+
+#define STDIN 0
+
+int
+main(void) {
+    timeval tv;
+    fd_set readfds;
+
+    tv.tv_sec = 2;
+    tv.tv_usec = 500000;
+
+    FD_ZERO(&readfds);
+    FD_SET(STDIN, &readfds);
+
+    select(STDIN + 1, &readfds, NULL, NULL, NULL);
+
+	// 当按下某个按键或者超时的逻辑处理
+    if (FD_ISSET(STDIN, &readfds))
+        printf("A key was pressed!\n");
+    else
+        printf("Timed out.\n");
+
+    return 0;
+}
 ```

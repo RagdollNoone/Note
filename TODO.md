@@ -20,6 +20,8 @@ https://preshing.com/
     https://stackoverflow.com/questions/19540425/what-is-standard-input
 - Select function in socket programming
     https://stackoverflow.com/questions/4171270/select-function-in-socket-programming
+- What is uint32_t
+    https://stackoverflow.com/questions/48833976/what-is-uint32-t
 
 
 ## Need To Read
@@ -40,6 +42,11 @@ https://preshing.com/
 - 状态机
     https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
 
+- 跨平台SDK
+    https://www.zhihu.com/question/36019568
+
+- book
+    The Practice of programming
 
 ## UML
 - Need Read

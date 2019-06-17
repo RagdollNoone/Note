@@ -1,14 +1,24 @@
 模板方法
 =======
 
-## 作用
+## 定义
+
+```txt
+在一个方法中定义一个算法的框架, 而将一些步骤延时到自雷当中.
+模板方法可以在不改变算法结构的请况下, 重新定义算法中的某些步骤
+```
+
+## Why
+
+```txt
 封装具有共性的算法, 比如说泡茶和泡咖啡, 两者都需要
 1. 烧开水
 2. 泡
 3. 倒入杯子
 4. 加调料
+```
 
-## 模板方法实现
+## How
 
 ```txt
 abstract修饰对应的抽象类
@@ -20,18 +30,24 @@ abstract class AbstractClass {
     final void templateMethod() {
         primitiveOperation1();
         primitiveOperation2();
-        concreteOperation();
-        hook();
+        if (hook()) {
+            concreteOperation1();
+        };
+        concreteOperation2();
     }
 
     abstract void primitiveOperation1();
     abstract void primitiveOperation2();
 
-    void concreteOperation() {
+    void concreteOperation1() {
         // 这里是实现
     }
 
-    void hook() {}
+    void concreteOperation2() {
+        // 这里是实现
+    }
+
+    boolean hook() { return true; }
 }
 ```
 
@@ -51,6 +67,8 @@ abstract class AbstractClass {
 
 ## 扩展
 
+
+```txt
 1. 现实中模板方法的例子
 
 ```txt
@@ -59,3 +77,4 @@ read(byte b[], int off, int len)调用
 ```
 
 2. JFrame的paint方法是一个钩子
+```

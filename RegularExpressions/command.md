@@ -191,3 +191,6 @@ egrep "^A?" test.md
 
 * 搜索t1在那里被赋值
 > grep -rn "t1.*[^=]=[^=]" fpu_sqrt.c
+
+## TODO
+* 检索一个关键字, 要求检索出的行不以import, public, private开头

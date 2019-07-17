@@ -62,6 +62,10 @@ https://preshing.com/
 
 ## 自动化测试
 
+## C++百万并发网络通信引擎
+    https://pan.baidu.com/s/1D-Xyn1Ppm3nlGhTVR7DRmg
+    drsi
+
 ```txt
 Selenium、Jasmine、Cucumber
 Travis-CI来跑我们的测试

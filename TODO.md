@@ -140,6 +140,24 @@ GitHub 上拥有大量的学习资源，从各类的文章到笔记，还有各�
 除此，在 AI 相当流行的今天也是如此，也可以搜索到其它同学训练好的模型。
 ```
 
+## State Machine
+
+```txt
+日志系统
+选择从错误的状态跳转, 报错
+并且要有ignore行为, 即不报错, 自动忽略
+
+状态机要有随机跳转状态的功能, 并且内置变量决定是否开启这项功能
+某个trasition可以出现环, 或者说这个trasition可以有两组不同的src和dst
+对于某个完全相同的trasition, 只执行查找到的第一个, 之后的全部忽略不执行
+
+支持符号*的展开功能
+
+实现trasition的src和dst是同一个state的情况
+实现特殊的trasition, 它的dst是NULL, 实际运行时只触发trasition的回调和state切换的回调
+
+```
+
 ## Temp
 
 ```txt

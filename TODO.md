@@ -1,11 +1,13 @@
 ## how to use
 https://medium.com/
 
+
 ## 编程博客
 https://eli.thegreenplace.net/
 https://eklitzke.org/
 https://www.fluentcpp.com/
 https://preshing.com/
+
 
 ## 计算机网络问题收藏
 - Why is sin_addr inside the structure in_addr?
@@ -24,11 +26,11 @@ https://preshing.com/
     https://stackoverflow.com/questions/48833976/what-is-uint32-t
 - 数字签名是什么
     http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html
-
+- Cmake
+    https://stackoverflow.com/questions/20944784/why-is-conversion-from-string-constant-to-char-valid-in-c-but-invalid-in-c
 
 
 ## Need To Read
-
 - 鸟哥的linux私房菜
 	http://cn.linux.vbird.org/
 
@@ -44,6 +46,244 @@ https://preshing.com/
 	https://pdos.csail.mit.edu/6.828/2014/xv6/book-rev8.pdf
 - 状态机
     https://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
+
+    ```txt
+    dst等于自身的transition实现
+    dst等于null的transition实现
+
+    queued transition把一系列transition当作一个transition执行完成
+    注意回调的执行方式为
+    t1 --> after1 --> before2 --> t2 --> after2
+
+    如果下层出现了恐慌, 代码控制权应该返回给StateMachine, 不能断线
+
+    EventData是否需要能被继承 来实现多变的业务逻辑
+    ```
+
+    ```python
+    from transitions import Machine
+    from transitions.extensions import MachineFactory
+    from IPython.display import Image, display, display_png
+    import random
+    import os, sys, inspect, io
+
+
+    # Example 1
+    # class NarcolepticSuperhero(object):
+    #
+    #     # Define some states. Most of the time, narcoleptic superheroes are just like
+    #     # everyone else. Except for...
+    #     states = ['asleep', 'hanging out', 'hungry', 'sweaty', 'saving the world']
+    #
+    #     def __init__(self, name):
+    #
+    #         # No anonymous superheroes on my watch! Every narcoleptic superhero gets
+    #         # a name. Any name at all. SleepyMan. SlumberGirl. You get the idea.
+    #         self.name = name
+    #
+    #         # What have we accomplished today?
+    #         self.kittens_rescued = 0
+    #
+    #         # Initialize the state machine
+    #         self.machine = Machine(model=self, states=NarcolepticSuperhero.states, initial='asleep')
+    #
+    #         # Add some transitions. We could also define these using a static list of
+    #         # dictionaries, as we did with states above, and then pass the list to
+    #         # the Machine initializer as the transitions= argument.
+    #
+    #         # At some point, every superhero must rise and shine.
+    #         self.machine.add_transition(trigger='wake_up', source='asleep', dest='hanging out')
+    #
+    #         # Superheroes need to keep in shape.
+    #         self.machine.add_transition('work_out', 'hanging out', 'hungry')
+    #
+    #         # Those calories won't replenish themselves!
+    #         self.machine.add_transition('eat', 'hungry', 'hanging out')
+    #
+    #         # Superheroes are always on call. ALWAYS. But they're not always
+    #         # dressed in work-appropriate clothing.
+    #         self.machine.add_transition('distress_call', '*', 'saving the world',
+    #                          before='change_into_super_secret_costume')
+    #
+    #         # When they get off work, they're all sweaty and disgusting. But before
+    #         # they do anything else, they have to meticulously log their latest
+    #         # escapades. Because the legal department says so.
+    #         self.machine.add_transition('complete_mission', 'saving the world', 'sweaty',
+    #                          after='update_journal')
+    #
+    #         # Sweat is a disorder that can be remedied with water.
+    #         # Unless you've had a particularly long day, in which case... bed time!
+    #         self.machine.add_transition('clean_up', 'sweaty', 'asleep', conditions=['is_exhausted'])
+    #         self.machine.add_transition('clean_up', 'sweaty', 'hanging out')
+    #
+    #         # Our NarcolepticSuperhero can fall asleep at pretty much any time.
+    #         self.machine.add_transition('nap', '*', 'asleep')
+    #
+    #     def update_journal(self):
+    #         """ Dear Diary, today I saved Mr. Whiskers. Again. """
+    #         self.kittens_rescued += 1
+    #
+    #     def is_exhausted(self):
+    #         """ Basically a coin toss. """
+    #         return random.random() < 0.5
+    #
+    #     def change_into_super_secret_costume(self):
+    #         print("Beauty, eh?")
+    #
+    #
+    # batman = NarcolepticSuperhero("Batman")
+    # print(batman.state)
+    #
+    # batman.wake_up()
+    # print(batman.state)
+    #
+    # batman.nap()
+    # print(batman.state)
+    #
+    # # batman.clean_up()
+    #
+    # batman.wake_up()
+    # batman.work_out()
+    # print(batman.state)
+    #
+    # print("rescue kitten number: " + str(batman.kittens_rescued))
+    #
+    # batman.distress_call()
+    # print(batman.state)
+    #
+    # batman.complete_mission()
+    # print(batman.state)
+    #
+    # batman.clean_up()
+    # print(batman.state)
+    #
+    # print("rescue kitten number: " + str(batman.kittens_rescued))
+
+
+    # Example 2
+    class Matter(object):
+        heat = False
+        attempts = 0
+
+        def count_attempts(self):
+            self.attempts += 1
+
+        def say_hello(self):
+            print("hello, new state!")
+
+        def say_goodbye(self):
+            print("goodbye, old state")
+
+        def is_flammable(self):
+            return True
+
+        def is_really_hot(self):
+            return self.heat
+
+        def heat_up(self):
+            self.heat = random.random() < 0.25
+
+        def stats(self):
+            print("It took you %i attempts to melt the lump" % self.attempts)
+
+        def raise_error(self, event):
+            raise ValueError("Oh no")
+
+        def prepare(self, event):
+            print("I'm ready!")
+
+        def finalize(self, event):
+            print("Result: ", type(event.error), event.error)
+
+        pass
+
+
+    # GraphMachine = MachineFactory.get_predefined(graph=True, nested=True)
+    #
+    # states = ['solid', 'liquid', 'gas', 'plasma']
+    # transitions = [
+    #     {'trigger': 'melt', 'source': 'solid', 'dest': 'liquid'},
+    #     {'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas'},
+    #     {'trigger': 'sublimate', 'source': 'solid', 'dest': 'gas'},
+    #     {'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma'},
+    # ]
+    #
+    # lump = Matter()
+    # machine = Machine(model=lump, states=states, transitions=transitions, initial='solid')
+    # print(lump.state)
+    #
+    # machine.on_exit_liquid('say_goodbye')
+    # machine.on_enter_gas('say_hello')
+    #
+    # lump.evaporate()
+    # print(lump.state)
+    #
+    # lump.trigger('ionize')
+    # print(lump.state)
+    #
+    # lump.show_graph()
+
+    # states = ['A', 'B', 'C', 'A']
+    # machine = Machine(states=states, initial='A')
+    # machine.add_ordered_transitions()
+    # machine.add_states(['D', 'E'])
+    # machine.add_ordered_transitions()
+    # for i in range(10):
+    #     machine.next_state()
+    #     print(machine.state)
+    #     print("-----------")
+
+
+    # def go_to_c():
+    #     global machine
+    #     machine.to_C()
+    #
+    #
+    # def after_advance():
+    #     print("I am in state B now")
+    #
+    #
+    # def entering_c():
+    #     print("I am in state C now")
+    #
+    #
+    # states = ['A', 'B', 'C']
+    # machine = Machine(states=states, queued=True, initial='A')
+    #
+    # machine.add_transition('advance', 'A', 'B', after=after_advance)
+    # machine.on_enter_B(go_to_c)
+    # machine.on_enter_C(entering_c)
+    # machine.advance()
+
+    # states = ['solid', 'liquid', 'gas', 'plasma']
+    #
+    # lump = Matter()
+    # machine = Machine(model=lump, states=states, initial='solid')
+    #
+    # # machine.add_transition('heat', 'solid', 'gas', conditions='is_flammable')
+    # machine.add_transition('melt', 'solid', 'liquid', prepare=['heat_up', 'count_attempts'], conditions='is_really_hot', after='stats')
+    # for i in range(4):
+    #     if(lump.melt()):
+    #         print(lump.state)
+    #         break
+    #     pass
+
+    states = ['solid', 'liquid', 'gas', 'plasma']
+
+    lump = Matter()
+    machine = Machine(model=lump, states=states,
+                      prepare_event='prepare',
+                      before_state_change='raise_error',
+                      finalize_event='finalize',
+                      send_event=True)
+
+    try:
+        lump.to_gas()
+    except ValueError:
+        pass
+
+    print(lump.state)
+    ```
 
 - 跨平台SDK
     https://www.zhihu.com/question/36019568
@@ -65,6 +305,30 @@ https://preshing.com/
 ## C++百万并发网络通信引擎
     https://pan.baidu.com/s/1D-Xyn1Ppm3nlGhTVR7DRmg
     drsi
+
+    ## 代码思考
+
+    ```c++
+    // 这段代码输出了f()这句话, 说明A在实例化之前函数已经分配到了地址
+    // 那么为什么把f()作为回调传递的时候， f要显式的声明为静态呢
+    // 常规的f始终找不到一种合适的写法
+    // main.c
+    #include <iostream>
+    using namespace std;
+
+    class A {
+    public:
+        void f() {
+            cout << "f()" << endl;
+        }
+    }
+
+    int main() {
+        A *a = (A *)NULL;
+        a->f();
+    }
+
+    ```
 
 ```txt
 Selenium、Jasmine、Cucumber

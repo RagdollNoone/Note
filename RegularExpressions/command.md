@@ -180,6 +180,9 @@ egrep "^A?" test.md
 * 搜索一个关键字, 但是不希望匹配到出现在注释 或者System.out这样的输出语句当中
 > [^///\*System.out]KeyWordHere
 
+* 查找以import开头 带有某个关键字的行(java)
+> ^import.*\bkeyword\b
+
 * 搜索一个类的字段
 > (^|\.)FieldOfClass([^a-zA-Z_]|$)
 

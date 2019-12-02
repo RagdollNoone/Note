@@ -1,7 +1,6 @@
 ## how to use
 https://medium.com/
 
-
 ## 编程博客
 https://eli.thegreenplace.net/
 https://eklitzke.org/
@@ -10,7 +9,6 @@ https://preshing.com/
 
 ## 性能调优
 https://www.agner.org/optimize/
-
 
 ## 计算机网络问题收藏
 - Why is sin_addr inside the structure in_addr?
@@ -34,10 +32,11 @@ https://www.agner.org/optimize/
 -  阅读资源
     https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read
 
-
 ## Need To Read
 - 鸟哥的linux私房菜
 	http://cn.linux.vbird.org/
+- ubuntu和windows7双系统安装
+    https://itsfoss.com/install-ubuntu-dual-boot-mode-windows/
 
 - 数据库设计那些事
 	https://www.imooc.com/learn/117
@@ -80,8 +79,6 @@ https://www.agner.org/optimize/
     https://www.cnblogs.com/shindo/p/5579191.html
 
 ## XMind
-
-## 自动化测试
 
 ## C++百万并发网络通信引擎
     https://pan.baidu.com/s/1D-Xyn1Ppm3nlGhTVR7DRmg

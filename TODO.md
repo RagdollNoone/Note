@@ -215,10 +215,137 @@ GitHub 上拥有大量的学习资源，从各类的文章到笔记，还有各�
 16位ip
 32位eip
 64位rip
-http://beej.us/guide/bgnet/examples/ 网络的例子
 okular pdf mac
 微服务 microservice
 事务 transaction
 活动 activity
 SSH Jar包源码项目 ganymed
+```
+
+
+## 网页请求步骤
+
+```txt
+大量并发浏览器请求 ---> web服务器集群(nginx) --->
+应用服务器集群(tomcat) ---> 文件/数据库/缓存/消息队列服务器集群
+```
+
+## 后端知识点
+
+```txt
+java基础
+设计模式
+jvm原理
+spring原理及源码
+linux
+mysql事务隔离与锁机制
+mongodb
+http/tcp
+多线程分布式架构
+弹性计算架构
+微服务架构
+java性能优化
+以及相关的项目管理等等。
+```
+
+## 前端服务器nginx
+
+```txt
+前端服务器负责控制 页面引用,跳转,路由
+前端页面异步调用后端的接口
+后端/应用服务器使用tomcat(把tomcat想象成一个数据提供者)
+加快整体响应速度(这里需要使用一些前端工程化的框架比如nodejs，react，router，react，redux，webpack)
+
+减少后端服务器的并发/负载压力
+除了接口以外的其他所有 http请求全部转移到前端 nginx上
+接口的请求调用 tomcat 参考nginx反向代理tomcat 且除了第一次页面请求外 浏览器会大量调用本地缓存
+```
+
+## Spring的IoC
+
+```txt
+低级容器:
+只负载加载 Bean 获取 Bean
+加载配置文件(从 XML，数据库，Applet)并解析成 BeanDefinition 到低级容器中
+
+高级容器:
+支持不同的信息源头 可以访问文件资源 支持应用事件(Observer 模式)。
+低级容器加载成功后 高级容器启动高级功能 例如接口回调 监听器 自动实例化单例 发布事件等等功能。
+
+一个IoC启动过程是什么样子的
+说白了 就是ClassPathXmlApplicationContext这个类
+在启动时都做了啥。
+```
+
+## cookie和session
+
+```text
+http协议 而这种协议是无状态的 所以这就导致了服务器无法知道是谁在浏览网页
+但很明显 一些网页需要知道用户的状态例如登陆 购物车等。
+
+相同点：
+Session和Cookie都是为了让http协议有状态而存在
+Session通过Cookie工作 Cookie传输的SessionID让Session知道这个客户端到底是谁
+
+不同点：
+Session将信息保存到服务器 Cookie将信息保存在客户端
+```
+
+## java的单例模式
+
+```txt
+需要做到懒加载 线程安全 节省内存
+```
+
+* example1
+```java
+// 这种方式 线程安全 但是一启动就会加载这个类并分配内存
+// 如果这个类没有用到 内存就浪费了
+public class Singleton {
+    private final static Singleton instance = new Singleton();
+
+    private Singleton() {}
+
+    public Singleton getInstance() { return instance; }
+}
+```
+
+* example2
+```java
+// 线程安全 节省内存 但是很啰嗦
+public class Singleton {
+    private volatile static Singleton instance;
+
+    private Singleton() {}
+
+    public Singleton getInstance() {
+        if (null == instance) {
+            synchronized (Singleton.class) {
+                if (null == instance) {
+                    instance = new Singleton();
+                }
+            }
+        }
+
+        return instance;
+    }
+}
+```
+
+* example3
+```java
+// 比较完美的一种写法
+// 静态内部类不会在一开始被装载 所有没有内存消耗问题
+// JVM在装载静态内部类是线程安全的 只有在使用内部类才会去装载 所以线程是安全的
+public class Singleton {
+
+    // 私有类一定要是static的吗
+    private static class SingletonHolder {
+        private final static Singleton instance = new Singleton();
+    }
+
+    private Singleton() {}
+
+    public synchronized Singleton getInstance() { return SingletonHolder.instance; }
+}
 ```

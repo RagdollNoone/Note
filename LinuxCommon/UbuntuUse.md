@@ -31,3 +31,13 @@ sudo apt-get --purge remove programName
 3. ubuntu自动删除不再有依赖关系的包
 sudo apt-get autoremove
 ```
+
+## 安装操作系统
+
+```txt
+ubuntu和windows7双系统安装
+https://itsfoss.com/install-ubuntu-dual-boot-mode-windows/
+
+使用Ubuntu制作windows引导盘
+https://askubuntu.com/questions/122343/install-windows-7-from-ubuntu-on-usb-drive
+```

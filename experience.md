@@ -228,20 +228,56 @@ public class Singleton {
 ```java
 i = 2; // 原子操作 读取
 i = j; // 非原子操作 读j 写到i
-i++;
-i = i + 1;
+i++; // 非原子 读i 加1 写回主存
+i = i + 1; // 同上
+```
+
+- 有序性
+```java
+double pi = 3.14; // A
+double r = 1; // B
+double s = pi * r * r; // C
+
+// 实际的执行顺序可能是A B C
+// 也可能是B A C
 ```
 
 
-## volatile
+- 可见性
 
 ```txt
+修饰符volatile
 作用
 1. 保证不同线程之间的内存可见性
 2. 禁止指令排序
 
 内存可见性
 线程有自己的工作内存 通过加载保存操作 才会写入主存或从主存读取
+而如果变量用volatile来修饰 那么在读的时候 由于可见性会发现工作
+内存当中的缓存值失效 进而去主存读取最新的值
 
-volatile用来保证可见性 有序性(还有一个是原子性)
+volatile用来保证可见性 有序性
+实际代码的用法 修饰状态量
+```
+
+- example
+
+```java
+int a = 0;
+boolean flag = false;
+
+public void write() {
+    a = 2; // A
+    flag = true; // B
+}
+
+public void mutiply() {
+    if (flag) {
+        int ret = a * a; // C
+    }
+}
+// 两个线程 分别运行write和mutiply
+// 当write执行完成之后 变量没有写入主存之前 执行了mutiply
+// flag依然为false 不会得到预期结果 a的值也可能是0而不是2
+// 所以flag应该被volatile修饰
 ```

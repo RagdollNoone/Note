@@ -1,7 +1,9 @@
 ## how to use
+
 https://medium.com/
 
 ## 编程博客
+
 https://eli.thegreenplace.net/
 
 https://eklitzke.org/
@@ -11,7 +13,12 @@ https://www.fluentcpp.com/
 https://preshing.com/
 
 ## 性能调优
+
 https://www.agner.org/optimize/
+
+## 提升编程能力
+
+http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
 
 ## 计算机网络问题收藏
 - Why is sin_addr inside the structure in_addr?
@@ -55,11 +62,40 @@ https://www.agner.org/optimize/
     https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read
 
 ## Need To Read
-- 鸟哥的linux私房菜
+- linux
 
 	http://cn.linux.vbird.org/
 
+    https://www.w3cschool.cn/linux/
 
+- 如何建立一个网站
+
+    https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web
+
+    https://code.tutsplus.com/tutorials/how-to-create-a-phpmysql-powered-forum-from-scratch--net-10188
+
+- JavaScript
+
+    https://www.liaoxuefeng.com/wiki/1022910821149312
+
+    https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
+
+- PHP
+
+    https://www.w3school.com.cn/php/index.asp
+
+- HTTP
+
+    https://developer.mozilla.org/zh-CN/docs/Web/HTTP
+
+    https://www.keycdn.com/blog/http-security-headers
+
+- web调试
+
+    http://www.igeekbar.com/igeekbar/post/156.htm
+
+- 字符编码
+- http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html
 
 - 数据库设计那些事
 
@@ -87,6 +123,8 @@ https://www.agner.org/optimize/
 
 - book
     The Practice of programming
+    Spring in Action
+    Spring Boot 实战
 
 ## UML
 - Need Read

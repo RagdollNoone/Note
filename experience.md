@@ -149,20 +149,6 @@ java性能优化
 在启动时都做了啥。
 ```
 
-## cookie和session
-
-```text
-http协议 而这种协议是无状态的 所以这就导致了服务器无法知道是谁在浏览网页
-但很明显 一些网页需要知道用户的状态例如登陆 购物车等。
-
-相同点：
-Session和Cookie都是为了让http协议有状态而存在
-Session通过Cookie工作 Cookie传输的SessionID让Session知道这个客户端到底是谁
-
-不同点：
-Session将信息保存到服务器 Cookie将信息保存在客户端
-```
-
 ## java的单例模式
 
 ```txt

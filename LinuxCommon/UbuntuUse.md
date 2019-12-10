@@ -19,6 +19,14 @@ sudo gedit /etc/apt/apt.conf
 
 ## Unix下的ps或top命令可以用来检查内存泄露
 
+## 安装软件
+
+```txt
+sudo apt install gdebi-core
+
+sudo gdebi you_want_to_install.deb
+```
+
 ## 删除软件
 
 ```txt
@@ -40,4 +48,14 @@ https://itsfoss.com/install-ubuntu-dual-boot-mode-windows/
 
 使用Ubuntu制作windows引导盘
 https://askubuntu.com/questions/122343/install-windows-7-from-ubuntu-on-usb-drive
+```
+
+## 文件夹改名
+
+```txt
+export LANG=en_US
+xdg-user-dirs-gtk-update
+
+export LANG=zh_CN.UTF-8
+xdg-user-dirs-gtk-update
 ```

@@ -61,12 +61,15 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
 
     https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read
 
+- Spring Boot
+  https://www.linode.com/docs/development/java/how-to-deploy-spring-boot-applications-nginx-ubuntu-16-04/
+
 ## Need To Read
 - linux
 
-	http://cn.linux.vbird.org/
+  http://cn.linux.vbird.org/
 
-    https://www.w3cschool.cn/linux/
+  https://www.w3cschool.cn/linux/
 
 - 如何建立一个网站
 
@@ -95,7 +98,8 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
     http://www.igeekbar.com/igeekbar/post/156.htm
 
 - 字符编码
-- http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html
+
+  http://www.imkevinyang.com/2010/06/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%8C%E4%BD%A0%E6%89%80%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84.html
 
 - 数据库设计那些事
 
@@ -103,15 +107,15 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
 
 - operating system
 
-	http://pages.cs.wisc.edu/~bart/537/lecturenotes/titlepage.html
+  http://pages.cs.wisc.edu/~bart/537/lecturenotes/titlepage.html
 
-    http://pages.cs.wisc.edu/~remzi/OSTEP/
+  http://pages.cs.wisc.edu/~remzi/OSTEP/
 
-	https://pdos.csail.mit.edu/6.828/2012/xv6.html
+  https://pdos.csail.mit.edu/6.828/2012/xv6.html
 
-    https://pdos.csail.mit.edu/6.828/2014/schedule.html
+  https://pdos.csail.mit.edu/6.828/2014/schedule.html
 
-    https://pdos.csail.mit.edu/6.828/2014/xv6/book-rev8.pdf
+  https://pdos.csail.mit.edu/6.828/2014/xv6/book-rev8.pdf
 
 - 状态机
 
@@ -126,7 +130,12 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
     Spring in Action
     Spring Boot 实战
 
+## 全家桶激活
+
+  http://blog.jdk5.com/zh/jetbrains-activation-code/
+
 ## UML
+
 - Need Read
 
     https://www.quora.com/What-is-the-best-way-to-learn-UML
@@ -136,5 +145,7 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
     https://www.cnblogs.com/shindo/p/5579191.html
 
 ## C++百万并发网络通信引擎
+
     https://pan.baidu.com/s/1D-Xyn1Ppm3nlGhTVR7DRmg
-    drsi
+
+    提取码: drsi

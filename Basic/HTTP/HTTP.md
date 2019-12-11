@@ -85,12 +85,6 @@ Session通过Cookie工作 Cookie传输的SessionID让Session知道这个客户�
 Session将信息保存到服务器 Cookie将信息保存在客户端
 ```
 
-```txt
-http是无状态的 即不知道是谁在访问服务器 如果想要做把物品添加到购物车这样的行为
-需要cookie的帮助 cookie会记录一些登录的信息
-```
-
-
 - 连接管理
 
 ```txt

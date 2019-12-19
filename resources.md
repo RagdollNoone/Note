@@ -20,6 +20,12 @@ https://www.agner.org/optimize/
 
 http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
 
+
+## code design
+
+- How is ThreadLocal implemented?
+    https://plumbr.io/blog/java/how-is-threadlocal-implemented
+
 ## 计算机网络问题收藏
 - Why is sin_addr inside the structure in_addr?
 

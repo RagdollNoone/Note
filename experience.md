@@ -171,6 +171,12 @@ public class Singleton {
 * example2
 ```java
 // 线程安全 节省内存 但是很啰嗦
+// volatile 声明有意义 因为分配内存分三步
+// 1.分配内存
+// 2.变量初始化
+// 3.指向分配的内存地址
+// 实际运行的顺序可能是1 3 2 所以为了防止得到未初始化的变量
+// 需要用volatile声明
 public class Singleton {
     private volatile static Singleton instance;
 
@@ -356,4 +362,14 @@ JVM处理
 2. 两者都可以暂停线程的执行。
 3. Wait 通常被用于线程间交互/通信，sleep 通常被用于暂停执行。
 4. wait() 方法被调用后，线程不会自动苏醒，需要别的线程调用同一个对象上的 notify() 或者 notifyAllsleep() 方法执行完成后，线程会自动苏醒。
+```
+
+
+## synchronized和 volatile的区别
+
+```txt
+1. volatile 性能好 但是volatile关键字只能用于变量而synchronized关键字可以修饰方法以及代码块
+2. 多线程访问volatile关键字不会发生阻塞，而synchronized关键字可能会发生阻塞
+3. volatile关键字能保证数据的可见性，但不能保证数据的原子性。synchronized关键字两者都能保证。
+4. volatile关键字主要用于解决变量在多个线程之间的可见性，而 synchronized关键字解决的是多个线程之间访问资源的同步性。
 ```

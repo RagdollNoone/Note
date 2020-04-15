@@ -102,6 +102,9 @@ http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/
 - 多线程
     http://jcip.net/
 
+- python design pattern
+    https://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html
+
 - web调试
 
     http://www.igeekbar.com/igeekbar/post/156.htm

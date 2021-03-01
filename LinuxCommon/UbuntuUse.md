@@ -59,3 +59,14 @@ xdg-user-dirs-gtk-update
 export LANG=zh_CN.UTF-8
 xdg-user-dirs-gtk-update
 ```
+
+## 7zip解压后中文乱码
+```txt
+sudo apt-get install 7zip convmv
+
+# 使用7z解压缩
+$ LANG=C 7za x your-zip-file.zip
+
+# 递归转码，从GBK转为UTF-8
+$ convmv -f GBK -t utf8 --notest -r .
+```
